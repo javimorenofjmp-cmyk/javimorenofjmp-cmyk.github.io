@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Francisco Javier Moreno Pérez — Desarrollador multiplataforma con background en administración y finanzas. Java, Spring Boot, Flutter, MySQL." />
+<title>Francisco Javier Moreno · Portafolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700;9..144,900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e14;
+    --bg-elev: #11161e;
+    --bg-card: #151b25;
+    --border: #1f2733;
+    --border-strong: #2a3441;
+    --text: #e6edf3;
+    --text-dim: #8b96a7;
+    --text-mute: #5a6473;
+    --accent: #7dd3fc;       /* cyan suave */
+    --accent-warm: #fbbf24;  /* ámbar */
+    --accent-green: #86efac; /* verde técnico */
+    --accent-red: #fb7185;
+    --gradient: linear-gradient(135deg, #7dd3fc 0%, #c084fc 100%);
+    --shadow: 0 20px 50px -10px rgba(0,0,0,0.5);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(125,211,252,0.08) 0%, transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(192,132,252,0.06) 0%, transparent 40%);
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.4;
+    z-index: 1000;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  /* === NAV === */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(20px);
+    background: rgba(10,14,20,0.7);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  nav.scrolled { border-bottom-color: var(--border); }
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  nav .logo span { color: var(--accent); }
+  nav ul {
+    display: flex;
+    list-style: none;
+    gap: 32px;
+  }
+  nav ul a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--accent); }
+
+  /* === HERO === */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 40px 80px;
+    position: relative;
+  }
+  .hero-grid {
+    max-width: 1280px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .hero-content { animation: fadeInUp 1s ease 0.2s both; }
+  .hero-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent-green);
+    box-shadow: 0 0 12px var(--accent-green);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.85); }
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(48px, 7vw, 88px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+    font-variation-settings: "opsz" 144;
+  }
+  h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 19px;
+    color: var(--text-dim);
+    max-width: 520px;
+    margin-bottom: 40px;
+    line-height: 1.7;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  .hero-meta-item {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+  .hero-meta-item span {
+    display: block;
+    color: var(--text-mute);
+    margin-bottom: 4px;
+  }
+  .hero-meta-item strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .btn-primary:hover {
+    background: #38bdf8;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(125,211,252,0.3);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--border-strong);
+  }
+  .btn-ghost:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .btn svg { width: 14px; height: 14px; }
+
+  /* Hero photo */
+  .hero-photo {
+    position: relative;
+    animation: fadeIn 1.2s ease 0.4s both;
+  }
+  .hero-photo-frame {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    max-width: 380px;
+    margin-left: auto;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--bg-card);
+  }
+  .hero-photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(15%) contrast(1.05);
+  }
+  .hero-photo-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(10,14,20,0.4) 100%);
+  }
+  .hero-photo-deco {
+    position: absolute;
+    bottom: -16px; left: -24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-mute);
+    background: var(--bg);
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+  .hero-photo-deco span { color: var(--accent); }
+
+  /* === SECTIONS === */
+  section {
+    padding: 120px 40px;
+    max-width: 1280px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content: '';
+    width: 28px; height: 1px;
+    background: var(--accent);
+  }
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 56px;
+    max-width: 800px;
+  }
+  h2 em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 300;
+  }
+
+  /* === ABOUT === */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .about-text p {
+    font-size: 18px;
+    color: var(--text-dim);
+    line-height: 1.75;
+    margin-bottom: 20px;
+  }
+  .about-text p strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+  .about-quote {
+    border-left: 2px solid var(--accent);
+    padding-left: 24px;
+    margin-top: 32px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--text);
+    font-weight: 300;
+  }
+
+  /* === PROJECTS === */
+  .projects {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+  }
+  .project {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .project:nth-child(even) { direction: rtl; }
+  .project:nth-child(even) > * { direction: ltr; }
+
+  .project-visual {
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s ease, border-color 0.4s ease;
+  }
+  .project-visual:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-strong);
+  }
+
+  /* SVG illustration container */
+  .project-visual svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .project-info .project-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-mute);
+    margin-bottom: 16px;
+  }
+  .project-info h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .project-info h3 em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 300;
+  }
+  .project-tagline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent-warm);
+    margin-bottom: 20px;
+  }
+  .project-info p {
+    color: var(--text-dim);
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .project-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+  .stack-pill {
+    padding: 5px 12px;
+    border: 1px solid var(--border-strong);
+    border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    background: var(--bg-elev);
+  }
+  .project-meta {
+    display: flex;
+    gap: 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-mute);
+    flex-wrap: wrap;
+  }
+  .project-meta strong {
+    display: block;
+    color: var(--text);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  /* === STACK === */
+  .stack-section { background: var(--bg-elev); margin: 0; max-width: none; padding-left: 40px; padding-right: 40px; }
+  .stack-section-inner { max-width: 1280px; margin: 0 auto; }
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+  }
+  .stack-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    transition: all 0.3s;
+  }
+  .stack-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+  }
+  .stack-card-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .stack-card h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .stack-card p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  /* === CONTACT === */
+  .contact {
+    text-align: center;
+    padding: 140px 40px;
+  }
+  .contact h2 {
+    margin: 0 auto 32px;
+  }
+  .contact-sub {
+    font-size: 18px;
+    color: var(--text-dim);
+    max-width: 540px;
+    margin: 0 auto 48px;
+  }
+  .contact-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* === FOOTER === */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 40px;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-mute);
+  }
+  footer span { color: var(--accent); }
+
+  /* === ANIMATIONS === */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    nav ul { gap: 20px; }
+    nav ul a { font-size: 12px; }
+    section { padding: 80px 24px; }
+    .hero { padding: 100px 24px 60px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+    .hero-photo-frame { max-width: 280px; margin: 0 auto; }
+    .about-grid { grid-template-columns: 1fr; gap: 32px; }
+    .project { grid-template-columns: 1fr; gap: 32px; }
+    .project:nth-child(even) { direction: ltr; }
+    .project-info h3 { font-size: 28px; }
+    .stack-section { padding-left: 24px; padding-right: 24px; }
+    .contact { padding: 80px 24px; }
+  }
+  @media (max-width: 600px) {
+    nav ul { gap: 14px; }
+    nav ul li:nth-child(2) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="logo">fjmp<span>.dev</span></div>
+  <ul>
+    <li><a href="#about">sobre mí</a></li>
+    <li><a href="#projects">proyectos</a></li>
+    <li><a href="#stack">stack</a></li>
+    <li><a href="#contact">contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-content">
+      <div class="hero-tag">disponible · prácticas en PGK desde mayo 2026</div>
+      <h1>Construyo software<br>donde <em>código</em> y <em>negocio</em><br>se cruzan.</h1>
+      <p class="hero-sub">
+        Desarrollador multiplataforma con background real en administración y finanzas.
+        Combino criterio de gestión con stack técnico moderno para construir herramientas que entienden el problema, no solo el requisito.
+      </p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span>UBICACIÓN</span>
+          <strong>Dos Hermanas, Sevilla</strong>
+        </div>
+        <div class="hero-meta-item">
+          <span>FORMACIÓN</span>
+          <strong>DAM + Admin. y Finanzas</strong>
+        </div>
+        <div class="hero-meta-item">
+          <span>IDIOMAS</span>
+          <strong>ES nativo · EN C1 · FR A2</strong>
+        </div>
+      </div>
+      <div class="cta-row">
+        <a href="#projects" class="btn btn-primary">
+          Ver proyectos
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+        </a>
+        <a href="mailto:javimorenofjmp@gmail.com" class="btn btn-ghost">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <path d="M3 7l9 6 9-6"/>
+          </svg>
+          Contactar
+        </a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="hero-photo-frame">
+        <img src="photo.jpg" alt="Francisco Javier Moreno Pérez" />
+      </div>
+      <div class="hero-photo-deco">// <span>fjmp</span>.profile.jpg</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">Sobre mí</div>
+  <h2>Un perfil <em>híbrido</em> que pocos tienen.</h2>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>
+        Soy Francisco Javier — <strong>Javi</strong>. Vengo del mundo administrativo, donde llevé contabilidad, impuestos y nóminas en pyme antes de reciclarme al desarrollo de software.
+      </p>
+      <p>
+        Esa doble formación — Administración y Finanzas + Desarrollo de Aplicaciones Multiplataforma — es la que define mi forma de trabajar: <strong>llego a la solución técnica desde el entendimiento del problema real</strong>, no desde la documentación.
+      </p>
+    </div>
+    <div class="about-text">
+      <p>
+        Cuando un cliente necesita automatizar un proceso contable, gestionar contratos discontinuos o construir una herramienta que el equipo administrativo realmente vaya a usar, no tengo que aprender el dominio desde cero. <strong>Ya estuve al otro lado del teclado.</strong>
+      </p>
+      <p>
+        Hoy trabajo con Java, Spring Boot, Flutter, MySQL y herramientas de IA aplicadas al desarrollo. Mi proyecto más reciente — Moreno Agrotech — es una app fullstack real para gestión ganadera, desplegada y en uso.
+      </p>
+      <div class="about-quote">
+        "El mejor desarrollador para un problema de negocio es el que ha vivido ese negocio."
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Proyectos seleccionados</div>
+  <h2>Lo que <em>construyo</em>.</h2>
+
+  <div class="projects">
+
+    <!-- Moreno Agrotech -->
+    <div class="project reveal">
+      <div class="project-visual">
+        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.15"/>
+              <stop offset="100%" stop-color="#c084fc" stop-opacity="0.05"/>
+            </linearGradient>
+            <linearGradient id="phone1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1f2733"/>
+              <stop offset="100%" stop-color="#11161e"/>
+            </linearGradient>
+          </defs>
+          <rect width="400" height="300" fill="url(#grad1)"/>
+          <!-- grid -->
+          <g stroke="#1f2733" stroke-width="0.5" opacity="0.5">
+            <line x1="0" y1="50" x2="400" y2="50"/>
+            <line x1="0" y1="100" x2="400" y2="100"/>
+            <line x1="0" y1="150" x2="400" y2="150"/>
+            <line x1="0" y1="200" x2="400" y2="200"/>
+            <line x1="0" y1="250" x2="400" y2="250"/>
+            <line x1="50" y1="0" x2="50" y2="300"/>
+            <line x1="100" y1="0" x2="100" y2="300"/>
+            <line x1="150" y1="0" x2="150" y2="300"/>
+            <line x1="200" y1="0" x2="200" y2="300"/>
+            <line x1="250" y1="0" x2="250" y2="300"/>
+            <line x1="300" y1="0" x2="300" y2="300"/>
+            <line x1="350" y1="0" x2="350" y2="300"/>
+          </g>
+          <!-- phone mockup -->
+          <g transform="translate(140,40)">
+            <rect x="0" y="0" width="120" height="220" rx="14" fill="url(#phone1)" stroke="#2a3441" stroke-width="1"/>
+            <rect x="8" y="8" width="104" height="204" rx="8" fill="#0a0e14"/>
+            <!-- header -->
+            <rect x="14" y="20" width="60" height="6" rx="2" fill="#7dd3fc" opacity="0.8"/>
+            <rect x="14" y="32" width="40" height="4" rx="2" fill="#5a6473"/>
+            <!-- card 1 -->
+            <rect x="14" y="48" width="92" height="28" rx="4" fill="#151b25" stroke="#1f2733" stroke-width="0.5"/>
+            <circle cx="22" cy="62" r="4" fill="#86efac"/>
+            <rect x="32" y="56" width="40" height="3" rx="1" fill="#e6edf3"/>
+            <rect x="32" y="63" width="55" height="3" rx="1" fill="#5a6473"/>
+            <!-- card 2 -->
+            <rect x="14" y="82" width="92" height="28" rx="4" fill="#151b25" stroke="#1f2733" stroke-width="0.5"/>
+            <circle cx="22" cy="96" r="4" fill="#fbbf24"/>
+            <rect x="32" y="90" width="35" height="3" rx="1" fill="#e6edf3"/>
+            <rect x="32" y="97" width="50" height="3" rx="1" fill="#5a6473"/>
+            <!-- card 3 -->
+            <rect x="14" y="116" width="92" height="28" rx="4" fill="#151b25" stroke="#1f2733" stroke-width="0.5"/>
+            <circle cx="22" cy="130" r="4" fill="#7dd3fc"/>
+            <rect x="32" y="124" width="45" height="3" rx="1" fill="#e6edf3"/>
+            <rect x="32" y="131" width="48" height="3" rx="1" fill="#5a6473"/>
+            <!-- chart -->
+            <rect x="14" y="150" width="92" height="50" rx="4" fill="#151b25" stroke="#1f2733" stroke-width="0.5"/>
+            <polyline points="20,190 32,180 44,184 56,170 68,175 80,160 92,165 100,155" fill="none" stroke="#7dd3fc" stroke-width="1.5"/>
+            <circle cx="100" cy="155" r="2" fill="#7dd3fc"/>
+          </g>
+          <!-- backend ascii -->
+          <g transform="translate(20,180)" font-family="JetBrains Mono, monospace" font-size="9" fill="#5a6473">
+            <text x="0" y="0">$ spring boot</text>
+            <text x="0" y="14" fill="#86efac">▸ /api/ganado</text>
+            <text x="0" y="28">▸ /api/auth</text>
+            <text x="0" y="42">▸ /api/produccion</text>
+            <text x="0" y="56" fill="#7dd3fc">[OK] 200</text>
+          </g>
+          <g transform="translate(290,200)" font-family="JetBrains Mono, monospace" font-size="9" fill="#5a6473">
+            <text x="0" y="0">MySQL 8.0</text>
+            <text x="0" y="14" fill="#fbbf24">▸ ganado_db</text>
+            <text x="0" y="28">▸ users</text>
+            <text x="0" y="42">▸ partos</text>
+          </g>
+        </svg>
+      </div>
+      <div class="project-info">
+        <div class="project-num">// 01 — proyecto principal</div>
+        <h3>Moreno <em>Agrotech</em></h3>
+        <div class="project-tagline">App multiplataforma para gestión ganadera</div>
+        <p>
+          Aplicación fullstack desarrollada como proyecto final del DAM y desplegada en explotación real. CRUD completo de cabezas de ganado, autenticación de usuarios, registro de partos y producción, exportable en Android y Windows.
+        </p>
+        <p>
+          Backend Java/Spring Boot con API REST, persistencia en MySQL y frontend Flutter/Dart. APK desplegable e instalada en Samsung Galaxy S23 Ultra.
+        </p>
+        <div class="project-stack">
+          <span class="stack-pill">Java</span>
+          <span class="stack-pill">Spring Boot</span>
+          <span class="stack-pill">REST API</span>
+          <span class="stack-pill">MySQL</span>
+          <span class="stack-pill">Flutter</span>
+          <span class="stack-pill">Dart</span>
+          <span class="stack-pill">Android</span>
+          <span class="stack-pill">Windows</span>
+        </div>
+        <div class="project-meta">
+          <div>
+            ROL
+            <strong>Solo developer</strong>
+          </div>
+          <div>
+            ENTORNO
+            <strong>Producción real</strong>
+          </div>
+          <div>
+            ESTADO
+            <strong>Defendido y operativo</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bot Telegram -->
+    <div class="project reveal">
+      <div class="project-visual">
+        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.12"/>
+              <stop offset="100%" stop-color="#7dd3fc" stop-opacity="0.06"/>
+            </linearGradient>
+          </defs>
+          <rect width="400" height="300" fill="url(#grad2)"/>
+          <g stroke="#1f2733" stroke-width="0.5" opacity="0.5">
+            <line x1="0" y1="60" x2="400" y2="60"/>
+            <line x1="0" y1="120" x2="400" y2="120"/>
+            <line x1="0" y1="180" x2="400" y2="180"/>
+            <line x1="0" y1="240" x2="400" y2="240"/>
+            <line x1="80" y1="0" x2="80" y2="300"/>
+            <line x1="160" y1="0" x2="160" y2="300"/>
+            <line x1="240" y1="0" x2="240" y2="300"/>
+            <line x1="320" y1="0" x2="320" y2="300"/>
+          </g>
+          <!-- chat window -->
+          <g transform="translate(60,40)">
+            <rect x="0" y="0" width="280" height="220" rx="10" fill="#11161e" stroke="#2a3441" stroke-width="1"/>
+            <!-- chat header -->
+            <rect x="0" y="0" width="280" height="32" rx="10" fill="#151b25"/>
+            <rect x="0" y="22" width="280" height="10" fill="#151b25"/>
+            <circle cx="20" cy="16" r="8" fill="#7dd3fc"/>
+            <text x="34" y="20" font-family="JetBrains Mono, monospace" font-size="9" fill="#e6edf3">@fjmp_bot</text>
+            <circle cx="260" cy="16" r="2" fill="#86efac"/>
+            <!-- user message -->
+            <rect x="160" y="50" width="100" height="20" rx="10" fill="#7dd3fc"/>
+            <text x="170" y="63" font-family="JetBrains Mono, monospace" font-size="9" fill="#0a0e14">/start</text>
+            <!-- bot reply -->
+            <rect x="20" y="80" width="160" height="36" rx="10" fill="#1f2733"/>
+            <text x="30" y="95" font-family="JetBrains Mono, monospace" font-size="8" fill="#e6edf3">Hola Javi 👋</text>
+            <text x="30" y="108" font-family="JetBrains Mono, monospace" font-size="8" fill="#8b96a7">¿qué necesitas hoy?</text>
+            <!-- buttons -->
+            <rect x="20" y="124" width="70" height="22" rx="4" fill="#151b25" stroke="#7dd3fc" stroke-width="0.5"/>
+            <text x="30" y="138" font-family="JetBrains Mono, monospace" font-size="8" fill="#7dd3fc">Estado</text>
+            <rect x="96" y="124" width="70" height="22" rx="4" fill="#151b25" stroke="#fbbf24" stroke-width="0.5"/>
+            <text x="106" y="138" font-family="JetBrains Mono, monospace" font-size="8" fill="#fbbf24">Reportes</text>
+            <!-- user message 2 -->
+            <rect x="170" y="156" width="90" height="20" rx="10" fill="#7dd3fc"/>
+            <text x="180" y="169" font-family="JetBrains Mono, monospace" font-size="9" fill="#0a0e14">Estado</text>
+            <!-- bot reply 2 -->
+            <rect x="20" y="186" width="180" height="20" rx="10" fill="#1f2733"/>
+            <text x="30" y="199" font-family="JetBrains Mono, monospace" font-size="8" fill="#86efac">✓ Sistemas operativos</text>
+          </g>
+        </svg>
+      </div>
+      <div class="project-info">
+        <div class="project-num">// 02 — automatización</div>
+        <h3>Bot de <em>Telegram</em></h3>
+        <div class="project-tagline">Notificaciones y comandos para flujo personal</div>
+        <p>
+          Bot conversacional desarrollado para automatizar consultas de estado, recibir alertas y ejecutar comandos rápidos desde Telegram. Integración con APIs externas y respuesta a eventos en tiempo real.
+        </p>
+        <p>
+          Pensado como pieza modular reutilizable: la base permite ampliar el bot con nuevos comandos y conectarlo a distintos servicios sin reescribir el núcleo.
+        </p>
+        <div class="project-stack">
+          <span class="stack-pill">Python</span>
+          <span class="stack-pill">Telegram Bot API</span>
+          <span class="stack-pill">Webhooks</span>
+          <span class="stack-pill">Async I/O</span>
+        </div>
+        <div class="project-meta">
+          <div>
+            ROL
+            <strong>Diseño y desarrollo</strong>
+          </div>
+          <div>
+            TIPO
+            <strong>Proyecto personal</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STACK -->
+<section class="stack-section" id="stack">
+  <div class="stack-section-inner">
+    <div class="section-label">Stack técnico</div>
+    <h2>Las <em>herramientas</em> con las que trabajo.</h2>
+    <div class="stack-grid reveal">
+      <div class="stack-card">
+        <div class="stack-card-icon">{}</div>
+        <h4>Backend</h4>
+        <p>Java · Spring Boot · REST APIs · arquitectura por capas</p>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-icon">◇</div>
+        <h4>Frontend / Mobile</h4>
+        <p>Flutter · Dart · Android · Windows desktop · UI multiplataforma</p>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-icon">▤</div>
+        <h4>Bases de datos</h4>
+        <p>MySQL · SQL · diseño de esquemas · JDBC</p>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-icon">⌥</div>
+        <h4>Herramientas</h4>
+        <p>Git · GitHub · IntelliJ IDEA · VS Code · Maven</p>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-icon">⚡</div>
+        <h4>Otros lenguajes</h4>
+        <p>Python · scripting · automatización de procesos</p>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-icon">$</div>
+        <h4>Dominio funcional</h4>
+        <p>Contabilidad · fiscalidad · nóminas · ClassicConta · Excel avanzado</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-label" style="justify-content:center;">Hablemos</div>
+  <h2>¿Tienes algo en mente? <em>Cuéntamelo.</em></h2>
+  <p class="contact-sub">
+    Abierto a oportunidades como desarrollador junior, perfiles híbridos técnico-funcionales y proyectos donde un fullstack con criterio de negocio sume valor.
+  </p>
+  <div class="contact-actions">
+    <a href="mailto:javimorenofjmp@gmail.com" class="btn btn-primary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="5" width="18" height="14" rx="2"/>
+        <path d="M3 7l9 6 9-6"/>
+      </svg>
+      javimorenofjmp@gmail.com
+    </a>
+    <a href="https://github.com/javimorenofjmp-cmyk" target="_blank" rel="noopener" class="btn btn-ghost" id="github-link">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+      </svg>
+      GitHub
+    </a>
+  </div>
+  <p style="margin-top:48px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-mute);">
+    también en <strong style="color:var(--text-dim);">Dos Hermanas, Sevilla</strong> · disponible para remoto
+  </p>
+</section>
+
+<footer>
+  © 2026 Francisco Javier Moreno Pérez · diseñado y construido <span>con criterio</span>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
