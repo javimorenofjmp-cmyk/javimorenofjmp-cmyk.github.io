@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="Francisco Javier Moreno Pérez — Desarrollador multiplataforma con background en administración y finanzas. Java, Spring Boot, Flutter, MySQL." />
+<meta name="description" content="Francisco Javier Moreno Pérez — Desarrollador backend (Python, FastAPI, PostgreSQL) con experiencia real en producción y background en administración y finanzas. También Java, Spring Boot y Flutter." />
 <title>Francisco Javier Moreno · Portafolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -550,11 +550,11 @@
 <section class="hero">
   <div class="hero-grid">
     <div class="hero-content">
-      <div class="hero-tag">disponible · prácticas en PGK desde mayo 2026</div>
+      <div class="hero-tag">disponible · desarrollador backend · prácticas en PGK desde mayo 2026</div>
       <h1>Construyo software<br>donde <em>código</em> y <em>negocio</em><br>se cruzan.</h1>
       <p class="hero-sub">
-        Desarrollador multiplataforma con background real en administración y finanzas.
-        Combino criterio de gestión con stack técnico moderno para construir herramientas que entienden el problema, no solo el requisito.
+        Desarrollador backend con experiencia real en producción y background en administración y finanzas.
+        Trabajo con Python, FastAPI y PostgreSQL en sistemas reales, y combino el stack técnico con criterio de negocio para construir herramientas que entienden el problema, no solo el requisito.
       </p>
       <div class="hero-meta">
         <div class="hero-meta-item">
@@ -613,7 +613,7 @@
         Cuando un cliente necesita automatizar un proceso contable, gestionar contratos discontinuos o construir una herramienta que el equipo administrativo realmente vaya a usar, no tengo que aprender el dominio desde cero. <strong>Ya estuve al otro lado del teclado.</strong>
       </p>
       <p>
-        Hoy trabajo con Java, Spring Boot, Flutter, MySQL y herramientas de IA aplicadas al desarrollo. Mi proyecto más reciente — Moreno Agrotech — es una app fullstack real para gestión ganadera, desplegada y en uso.
+        Hoy desarrollo backend en producción: Python, FastAPI y PostgreSQL, con pipelines OCR y agentes de IA con revisión humana (HITL). Más de 17 Pull Requests y contribuciones integradas en la rama principal. Y antes, Moreno Agrotech — mi app fullstack para gestión ganadera, desplegada y en uso.
       </p>
       <div class="about-quote">
         "El mejor desarrollador para un problema de negocio es el que ha vivido ese negocio."
@@ -628,6 +628,95 @@
   <h2>Lo que <em>construyo</em>.</h2>
 
   <div class="projects">
+
+    <!-- PGK — Backend en producción -->
+    <div class="project reveal">
+      <div class="project-visual">
+        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gradpgk" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#86efac" stop-opacity="0.12"/>
+              <stop offset="100%" stop-color="#7dd3fc" stop-opacity="0.06"/>
+            </linearGradient>
+          </defs>
+          <rect width="400" height="300" fill="url(#gradpgk)"/>
+          <g stroke="#1f2733" stroke-width="0.5" opacity="0.5">
+            <line x1="0" y1="60" x2="400" y2="60"/>
+            <line x1="0" y1="120" x2="400" y2="120"/>
+            <line x1="0" y1="180" x2="400" y2="180"/>
+            <line x1="0" y1="240" x2="400" y2="240"/>
+            <line x1="80" y1="0" x2="80" y2="300"/>
+            <line x1="160" y1="0" x2="160" y2="300"/>
+            <line x1="240" y1="0" x2="240" y2="300"/>
+            <line x1="320" y1="0" x2="320" y2="300"/>
+          </g>
+          <!-- terminal -->
+          <g transform="translate(36,36)">
+            <rect x="0" y="0" width="328" height="170" rx="10" fill="#11161e" stroke="#2a3441" stroke-width="1"/>
+            <rect x="0" y="0" width="328" height="26" rx="10" fill="#151b25"/>
+            <rect x="0" y="18" width="328" height="8" fill="#151b25"/>
+            <circle cx="16" cy="13" r="3.5" fill="#fb7185"/>
+            <circle cx="28" cy="13" r="3.5" fill="#fbbf24"/>
+            <circle cx="40" cy="13" r="3.5" fill="#86efac"/>
+            <text x="250" y="17" font-family="JetBrains Mono, monospace" font-size="8" fill="#5a6473">conta · main</text>
+            <g font-family="JetBrains Mono, monospace" font-size="9">
+              <text x="14" y="48" fill="#7dd3fc">$ git push origin fix/...</text>
+              <text x="14" y="66" fill="#86efac">✓ PR #177 merged into main</text>
+              <text x="14" y="84" fill="#8b96a7">▸ POST /api/invoices/ocr</text>
+              <text x="14" y="100" fill="#8b96a7">▸ GET&nbsp;&nbsp;/api/contacts</text>
+              <text x="14" y="116" fill="#8b96a7">▸ HITL gate → review</text>
+              <text x="14" y="138" fill="#fbbf24">pytest ..........</text>
+              <text x="150" y="138" fill="#86efac">[OK] passed</text>
+            </g>
+          </g>
+          <!-- db + stack badges -->
+          <g transform="translate(36,222)" font-family="JetBrains Mono, monospace" font-size="9" fill="#5a6473">
+            <ellipse cx="14" cy="6" rx="14" ry="4" fill="none" stroke="#7dd3fc" stroke-width="1"/>
+            <path d="M0 6 V30 a14 4 0 0 0 28 0 V6" fill="none" stroke="#7dd3fc" stroke-width="1"/>
+            <text x="38" y="12" fill="#7dd3fc">PostgreSQL</text>
+            <text x="38" y="28" fill="#86efac">FastAPI · LangGraph</text>
+          </g>
+          <g transform="translate(250,232)" font-family="JetBrains Mono, monospace" font-size="22" fill="#86efac" opacity="0.85">
+            <text x="0" y="0">17+</text>
+            <text x="0" y="18" font-size="9" fill="#5a6473">PRs en main</text>
+          </g>
+        </svg>
+      </div>
+      <div class="project-info">
+        <div class="project-num">// 01 — experiencia en producción</div>
+        <h3>Backend en <em>producción</em></h3>
+        <div class="project-tagline">Desarrollo backend en PGK · plataforma de gestión contable-fiscal</div>
+        <p>
+          Desarrollo y mantenimiento de backend en producción: endpoints REST, diagnóstico y resolución de incidencias y suite de tests. Más de 17 Pull Requests y contribuciones integradas en la rama principal.
+        </p>
+        <p>
+          Pipeline OCR de extracción de facturas y agentes de IA con flujos de revisión humana (HITL) sobre LangGraph, con tres entornos sincronizados vía Git.
+        </p>
+        <div class="project-stack">
+          <span class="stack-pill">Python</span>
+          <span class="stack-pill">FastAPI</span>
+          <span class="stack-pill">PostgreSQL</span>
+          <span class="stack-pill">SQLAlchemy</span>
+          <span class="stack-pill">LangGraph</span>
+          <span class="stack-pill">REST API</span>
+          <span class="stack-pill">Git</span>
+        </div>
+        <div class="project-meta">
+          <div>
+            ROL
+            <strong>Backend Jr. (prácticas)</strong>
+          </div>
+          <div>
+            ENTORNO
+            <strong>Producción real</strong>
+          </div>
+          <div>
+            APORTE
+            <strong>17+ PRs en main</strong>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Moreno Agrotech -->
     <div class="project reveal">
@@ -703,7 +792,7 @@
         </svg>
       </div>
       <div class="project-info">
-        <div class="project-num">// 01 — proyecto principal</div>
+        <div class="project-num">// 02 — proyecto académico (DAM)</div>
         <h3>Moreno <em>Agrotech</em></h3>
         <div class="project-tagline">App multiplataforma para gestión ganadera</div>
         <p>
@@ -791,7 +880,7 @@
         </svg>
       </div>
       <div class="project-info">
-        <div class="project-num">// 02 — automatización</div>
+        <div class="project-num">// 03 — automatización</div>
         <h3>Bot de <em>Telegram</em></h3>
         <div class="project-tagline">Notificaciones y comandos para flujo personal</div>
         <p>
@@ -831,7 +920,7 @@
       <div class="stack-card">
         <div class="stack-card-icon">{}</div>
         <h4>Backend</h4>
-        <p>Java · Spring Boot · REST APIs · arquitectura por capas</p>
+        <p>Python · FastAPI · REST APIs · SQLAlchemy · también Java / Spring Boot</p>
       </div>
       <div class="stack-card">
         <div class="stack-card-icon">◇</div>
@@ -841,17 +930,17 @@
       <div class="stack-card">
         <div class="stack-card-icon">▤</div>
         <h4>Bases de datos</h4>
-        <p>MySQL · SQL · diseño de esquemas · JDBC</p>
+        <p>PostgreSQL · MySQL · SQL · migraciones · diseño de esquemas</p>
       </div>
       <div class="stack-card">
         <div class="stack-card-icon">⌥</div>
         <h4>Herramientas</h4>
-        <p>Git · GitHub · IntelliJ IDEA · VS Code · Maven</p>
+        <p>Git · GitHub · GitHub Actions (CI/CD) · gestión de 3 entornos · VS Code</p>
       </div>
       <div class="stack-card">
         <div class="stack-card-icon">⚡</div>
-        <h4>Otros lenguajes</h4>
-        <p>Python · scripting · automatización de procesos</p>
+        <h4>IA aplicada</h4>
+        <p>LangGraph · pipelines OCR · agentes con revisión humana (HITL)</p>
       </div>
       <div class="stack-card">
         <div class="stack-card-icon">$</div>
@@ -867,7 +956,7 @@
   <div class="section-label" style="justify-content:center;">Hablemos</div>
   <h2>¿Tienes algo en mente? <em>Cuéntamelo.</em></h2>
   <p class="contact-sub">
-    Abierto a oportunidades como desarrollador junior, perfiles híbridos técnico-funcionales y proyectos donde un fullstack con criterio de negocio sume valor.
+    Abierto a oportunidades como desarrollador backend junior, perfiles híbridos técnico-funcionales y proyectos donde un perfil con criterio de negocio sume valor.
   </p>
   <div class="contact-actions">
     <a href="mailto:javimorenofjmp@gmail.com" class="btn btn-primary">
